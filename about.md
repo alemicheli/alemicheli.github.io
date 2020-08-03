@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: About Me
 ---
 
 One of our most pressing and ever-evolving needs as scholars is to pass on our textual artifacts
@@ -24,8 +24,7 @@ veterans deploy beautiful editions with less effort, and that it can help us tea
 [in one academic semester](https://github.com/susannalles/MinimalEditions/blob/master/README.md),
 while allowing us to care for our projects at less cost, and perhaps, just perhaps, to generate
 high-quality editions on github.io in large quantities based on the
-[git-lit](http://jonreeve.com/2015/09/introducing-git-lit/) model by Jonathan Reeve. We're coming
-for you, Kindle!
+[git-lit](http://jonreeve.com/2015/09/introduci
 
 
 ## Sample Ed editions.
