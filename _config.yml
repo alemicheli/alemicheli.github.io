@@ -1,7 +1,7 @@
 # Built with Jekyll 3.6.0
 
 # Setup
-title:               Alessandro Micheli
+title:               'Alessandro Micheli'
 tagline:             ''
 description:         'Alessandro Micheli's website'
 url:                 'http://alemicheli.github.io'
@@ -9,7 +9,7 @@ baseurl:             ''
 
 # About/contact
 author:
-  name:              Alessandro Michlei
+  name:              Alessandro Micheli
   url:               https://alemicheli.github.io
   email:             a.micheli19@imperial.ac.uk
 
