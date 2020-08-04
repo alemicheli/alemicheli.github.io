@@ -47,14 +47,10 @@ $$ s_{n}(x) = \sum^{2^{n}}_{k=0} \sin\left(\frac{k}{2^{n+1}}\pi\right)\chi_{[\fr
 
 with \(n=1,2,\ldots\). The "Lebesgue Approximation" slider controls \(n\). The other two sliders, namely "Riemann Left Intervals"" and "Riemann Right Intervals", control the size of the partition of the Riemann Left and Right sums.
 
-<br>  
+<br> 
+<br> 
 
-Feel free to play around!
 
-          
-          
-            
-                
       
         
           
@@ -105,10 +101,67 @@ Feel free to play around!
     else document.addEventListener("DOMContentLoaded", fn);
   })();
 </script>
-    
 
 <br>
-For further information check <a href = "https://link.springer.com/content/pdf/10.1007/s11786-017-0321-5.pdf"> this paper</a> out.
+<br>
+Similarly, to approximate the integral \(\int^{1}_{0} \exp(x)dx \) we consider the following sequence of functions,
+
+$$ s_{n}(x) = \sum_{k=0}^{2^{n}} \exp(\frac{k}{2^{n}})\chi_{[\frac{k}{2^{n+1}},\frac{k+1}{2^{n+1}})}$
+
+for \( n=1,2,\ldots \). The plot below is similar to the one already discussed for \(\sin(x)\).
+
+
+<br>
+
+
+<div class="bk-root" id="929e59a1-d112-499d-bc49-e93ac43c086c" data-root-id="28531"></div>
+            
+          
+        
+      
+      
+        <script type="application/json" id="29381">
+          {"505168a3-6908-44f2-a6b1-5f7c27a780ce":{"roots":{"references":[{"attributes":{"children":[{"id":"28528"},{"id":"28530"},{"id":"28529"},{"id":"28423"}]},"id":"28531","type":"Column"},{"attributes":{"line_alpha":0.6,"line_color":"#1f77b4","line_width":2,"x":{"field":"x"},"y":{"field":"y"}},"id":"28457","type":"Line"},{"attributes":{"bottom":{"field":"bottom"},"fill_alpha":{"value":0.2},"fill_color":{"value":"green"},"left":{"field":"left"},"line_alpha":{"value":0.2},"line_color":{"value":"white"},"right":{"field":"right"},"top":{"field":"top"}},"id":"28506","type":"Quad"},{"attributes":{"click_policy":"hide","items":[{"id":"28470"},{"id":"28486"},{"id":"28504"},{"id":"28524"}],"location":"top_left"},"id":"28469","type":"Legend"},{"attributes":{"end":8,"format":"0[.]00","js_property_callbacks":{"change:value":[{"id":"28526"}]},"start":1,"title":"Riemann Left Intervals","value":5},"id":"28529","type":"Slider"},{"attributes":{"args":{"source":{"id":"28420"}},"code":"\n    var data = source.data;\n    var m = cb_obj.value\n    data['left'] = []\n    data['bottom'] = []\n    data['right'] = []\n    data['top'] = []\n    var left = data['left']\n    var right = data['right']\n    var top = data['top']\n    var bottom = data['bottom']\n    for (var i = 0; i &lt; (Math.pow(2,m)); i++) {\n        left[i] = (i)/(Math.pow(2,m)) \n        right[i] = left[i] + 1/(Math.pow(2,m)) \n        top[i] = Math.exp(left[i])\n        bottom[i] = 0\n    }\n    source.change.emit();\n"},"id":"28525","type":"CustomJS"},{"attributes":{"label":{"value":"exp(x)"},"renderers":[{"id":"28459"}]},"id":"28470","type":"LegendItem"},{"attributes":{"end":8,"format":"0[.]00","js_property_callbacks":{"change:value":[{"id":"28527"}]},"start":1,"title":"Riemann Right Intervals","value":5},"id":"28530","type":"Slider"},{"attributes":{"bottom":{"field":"bottom"},"fill_alpha":{"value":0.2},"fill_color":{"value":"blue"},"left":{"field":"left"},"line_alpha":{"value":0.2},"line_color":{"value":"white"},"right":{"field":"right"},"top":{"field":"top"}},"id":"28488","type":"Quad"},{"attributes":{"bottom":{"field":"bottom"},"fill_alpha":{"value":0.1},"fill_color":{"value":"blue"},"left":{"field":"left"},"line_alpha":{"value":0.1},"line_color":{"value":"white"},"right":{"field":"right"},"top":{"field":"top"}},"id":"28489","type":"Quad"},{"attributes":{"source":{"id":"28420"}},"id":"28475","type":"CDSView"},{"attributes":{"axis":{"id":"28438"},"dimension":1,"ticker":null},"id":"28441","type":"Grid"},{"attributes":{"data_source":{"id":"28420"},"glyph":{"id":"28472"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"28473"},"selection_glyph":null,"view":{"id":"28475"}},"id":"28474","type":"GlyphRenderer"},{"attributes":{"overlay":{"id":"28448"}},"id":"28444","type":"BoxZoomTool"},{"attributes":{"data_source":{"id":"28421"},"glyph":{"id":"28488"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"28489"},"selection_glyph":null,"view":{"id":"28491"}},"id":"28490","type":"GlyphRenderer"},{"attributes":{},"id":"28442","type":"PanTool"},{"attributes":{"bottom_units":"screen","fill_alpha":0.5,"fill_color":"lightgrey","left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","top_units":"screen"},"id":"28448","type":"BoxAnnotation"},{"attributes":{"formatter":{"id":"28465"},"ticker":{"id":"28435"}},"id":"28434","type":"LinearAxis"},{"attributes":{},"id":"28463","type":"BasicTickFormatter"},{"attributes":{"label":{"value":"Riemann Integral Right"},"renderers":[{"id":"28508"}]},"id":"28524","type":"LegendItem"},{"attributes":{"text":"f(x) = exp(x)"},"id":"28424","type":"Title"},{"attributes":{},"id":"28467","type":"Selection"},{"attributes":{"source":{"id":"28422"}},"id":"28509","type":"CDSView"},{"attributes":{},"id":"28447","type":"HelpTool"},{"attributes":{"args":{"source":{"id":"28422"}},"code":"\n    var data = source.data;\n    var m = cb_obj.value\n    data['left'] = []\n    data['bottom'] = []\n    data['right'] = []\n    data['top'] = []\n    var left = data['left']\n    var right = data['right']\n    var top = data['top']\n    var bottom = data['bottom']\n    for (var i = 0; i &lt; m; i++) {\n        left[i] = ( i)/(m)\n        right[i] = left[i] + 1/(m)\n        top[i] = Math.exp(right[i])\n        bottom[i] = 0\n    }\n    source.change.emit();\n"},"id":"28527","type":"CustomJS"},{"attributes":{},"id":"28430","type":"LinearScale"},{"attributes":{},"id":"28432","type":"LinearScale"},{"attributes":{"bottom":{"field":"bottom"},"fill_alpha":{"value":0.1},"fill_color":{"value":"green"},"left":{"field":"left"},"line_alpha":{"value":0.1},"line_color":{"value":"white"},"right":{"field":"right"},"top":{"field":"top"}},"id":"28507","type":"Quad"},{"attributes":{"end":8,"format":"0[.]00","js_property_callbacks":{"change:value":[{"id":"28525"}]},"start":1,"title":"Lebesgue Approximation","value":5},"id":"28528","type":"Slider"},{"attributes":{"below":[{"id":"28434"}],"center":[{"id":"28437"},{"id":"28441"},{"id":"28469"}],"left":[{"id":"28438"}],"plot_height":400,"plot_width":400,"renderers":[{"id":"28459"},{"id":"28474"},{"id":"28490"},{"id":"28508"}],"title":{"id":"28424"},"toolbar":{"id":"28449"},"x_range":{"id":"28426"},"x_scale":{"id":"28430"},"y_range":{"id":"28428"},"y_scale":{"id":"28432"}},"id":"28423","subtype":"Figure","type":"Plot"},{"attributes":{"data_source":{"id":"28422"},"glyph":{"id":"28506"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"28507"},"selection_glyph":null,"view":{"id":"28509"}},"id":"28508","type":"GlyphRenderer"},{"attributes":{},"id":"28443","type":"WheelZoomTool"},{"attributes":{},"id":"28439","type":"BasicTicker"},{"attributes":{"label":{"value":"Riemann Integral Left"},"renderers":[{"id":"28490"}]},"id":"28504","type":"LegendItem"},{"attributes":{},"id":"28435","type":"BasicTicker"},{"attributes":{},"id":"28502","type":"Selection"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"28442"},{"id":"28443"},{"id":"28444"},{"id":"28445"},{"id":"28446"},{"id":"28447"}]},"id":"28449","type":"Toolbar"},{"attributes":{"formatter":{"id":"28463"},"ticker":{"id":"28439"}},"id":"28438","type":"LinearAxis"},{"attributes":{"data":{"bottom":[0,0],"left":[0,1],"right":[0.5,1],"top":[0,1.6487212707001282]},"selected":{"id":"28484"},"selection_policy":{"id":"28483"}},"id":"28420","type":"ColumnDataSource"},{"attributes":{"source":{"id":"28419"}},"id":"28460","type":"CDSView"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAAAAAABbv1Kg1q+EP1u/UqDWr5Q/CB988MEHnz9bv1Kg1q+kPzJvZ0jM26k/CB988MEHrz9wZ0jM2xmyP1u/UqDWr7Q/RhdddNFFtz8yb2dIzNu5Px3HcRzHcbw/CB988MEHvz96O0Ni3s7AP3BnSMzbGcI/ZZNNNtlkwz9bv1Kg1q/EP1HrVwrU+sU/RhdddNFFxz88Q2LezpDIPzJvZ0jM28k/J5tssskmyz8dx3Ecx3HMPxPzdobEvM0/CB988MEHzz9/pUCtXynQP3o7Q2LeztA/ddFFF1100T9wZ0jM2xnSP2r9SoFav9I/ZZNNNtlk0z9gKVDrVwrUP1u/UqDWr9Q/VlVVVVVV1T9R61cK1PrVP0yBWr9SoNY/RhdddNFF1z9BrV8pUOvXPzxDYt7OkNg/N9lkk0022T8yb2dIzNvZPy0Fav1Kgdo/J5tssskm2z8iMW9nSMzbPx3HcRzHcdw/GF100UUX3T8T83aGxLzdPw6JeTtDYt4/CB988MEH3z8DtX6lQK3fP3+lQK1fKeA/ffDBBx984D96O0Ni3s7gP3eGxLydIeE/ddFFF1104T9yHMdxHMfhP3BnSMzbGeI/bbLJJpts4j9q/UqBWr/iP2hIzNsZEuM/ZZNNNtlk4z9j3s6QmLfjP2ApUOtXCuQ/XnTRRRdd5D9bv1Kg1q/kP1gK1PqVAuU/VlVVVVVV5T9ToNavFKjlP1HrVwrU+uU/TjbZZJNN5j9MgVq/UqDmP0nM2xkS8+Y/RhdddNFF5z9EYt7OkJjnP0GtXylQ6+c/P/jggw8+6D88Q2LezpDoPzmO4ziO4+g/N9lkk0026T80JObtDInpPzJvZ0jM2+k/L7rooosu6j8tBWr9SoHqPypQ61cK1Oo/J5tssskm6z8l5u0MiXnrPyIxb2dIzOs/IHzwwQcf7D8dx3Ecx3HsPxsS83aGxOw/GF100UUX7T8VqPUrBWrtPxPzdobEvO0/ED744IMP7j8OiXk7Q2LuPwvU+pUCte4/CB988MEH7z8Gav1KgVrvPwO1fqVAre8/AAAAAAAA8D8=","dtype":"float64","order":"little","shape":[100]},"y":{"__ndarray__":"AAAAAAAA8D+gXsRZlSnwP4flZsaWU/A/B7zIXgV+8D9BCKU+4qjwP15YmIQu1PA/Dh8oUuv/8D94Q8rLGSzxP9rE7Bi7WPE/9XH9Y9CF8T+YtHHaWrPxP2Fxzqxb4fE/+fuvDtQP8j//H9I2xT7yP88+GF8wbvI/Y4KVxBae8j+JJZWnec7yP5fRokta//I/3RGT97kw8z8b3Yv1mWLzPxE1DZP7lPM/kNz5IODH8z8ZJKDzSPvzP2/NwmI3L/Q/Lwaiyaxj9D/QeQSHqpj0Pyl7QP0xzvQ/zkVFkkQE9T94V6Sv4zr1P7fhmsIQcvU/OVQbPM2p9T/O/9aQGuL1P4fSRzn6GvY/Ey26sW1U9j+50VZ6do72PxbtLBcWyfY/+Tg8EE4E9z+SOX/xH0D3Pz+V9UqNfPc/OIeusJe59z9lbdO6QPf3P6NxsgWKNfg/vE7JMXV0+D9aMdDjA7T4P0i1xMQ39Pg/N//0gRI1+T9o8wrNlXb5P3aJF1zDuPk/ij2e6Zz7+T9Zn6A0JD/6PyT/qQBbg/o/DTnbFUPI+j8dn/ZA3g37PzoCbFMuVPs/ZtpkIzWb+z+VjtCL9OL7P3PccGxuK/w/YWDmqaR0/D8FPr0tmb78P8rpeeZNCf0/hhOmx8RU/T/Mst3J/6D9PxI13OoA7v0/Jc6JLco7/j8x6wiaXYr+P8HIwz292f4/DSx6K+sp/z/xP0976Xr/P++V10q6zP8/yaWT3q8PAEBPKnD9bTkAQCl1IJmYYwBAIhCZyzCOAECIT6uxN7kAQK7CDGuu5ABAvbdeGpYQAUAT0zXl7zwBQF66IfS8aQFAmtO0cv6WAUA/GIyPtcQBQLr8Vnzj8gFAeWzfbYkhAkCx2hGcqFACQB9oBUJCgAJA8h0EnlewAkAdPpPx6eACQD+pe4H6EQNAZ1rSlYpDA0DW+AB6m3UDQBqAznwuqANAlv5n8ETbA0DQamkq4A4EQK6P5oMBQwRA5g90Wap3BEDdgDAL3KwEQCedzfyX4gRA/Y6Zld8YBUDKUohAtE8FQCUyPWwXhwVAaVcUiwq/BUA=","dtype":"float64","order":"little","shape":[100]}},"selected":{"id":"28467"},"selection_policy":{"id":"28466"}},"id":"28419","type":"ColumnDataSource"},{"attributes":{},"id":"28465","type":"BasicTickFormatter"},{"attributes":{},"id":"28521","type":"UnionRenderers"},{"attributes":{},"id":"28522","type":"Selection"},{"attributes":{"bottom":{"field":"bottom"},"fill_alpha":{"value":0.2},"fill_color":{"value":"red"},"left":{"field":"left"},"line_alpha":{"value":0.2},"line_color":{"value":"white"},"right":{"field":"right"},"top":{"field":"top"}},"id":"28472","type":"Quad"},{"attributes":{"source":{"id":"28421"}},"id":"28491","type":"CDSView"},{"attributes":{"label":{"value":"Lebesgue Integral"},"renderers":[{"id":"28474"}]},"id":"28486","type":"LegendItem"},{"attributes":{"axis":{"id":"28434"},"ticker":null},"id":"28437","type":"Grid"},{"attributes":{"data":{"bottom":[0,0],"left":[0],"right":[1],"top":[2.718281828459045]},"selected":{"id":"28522"},"selection_policy":{"id":"28521"}},"id":"28422","type":"ColumnDataSource"},{"attributes":{},"id":"28483","type":"UnionRenderers"},{"attributes":{},"id":"28428","type":"DataRange1d"},{"attributes":{"data":{"bottom":[0,0],"left":[0],"right":[1],"top":[0.0]},"selected":{"id":"28502"},"selection_policy":{"id":"28501"}},"id":"28421","type":"ColumnDataSource"},{"attributes":{},"id":"28501","type":"UnionRenderers"},{"attributes":{},"id":"28445","type":"SaveTool"},{"attributes":{},"id":"28484","type":"Selection"},{"attributes":{},"id":"28446","type":"ResetTool"},{"attributes":{"args":{"source":{"id":"28421"}},"code":"\n    var data = source.data;\n    var m = cb_obj.value\n    data['left'] = []\n    data['bottom'] = []\n    data['right'] = []\n    data['top'] = []\n    var left = data['left']\n    var right = data['right']\n    var top = data['top']\n    var bottom = data['bottom']\n    for (var i = 0; i &lt; m; i++) {\n        left[i] = (i)/(m)\n        right[i] = left[i] + 1/(m)\n        top[i] = Math.exp(left[i])\n        bottom[i] = 0\n    }\n    source.change.emit();\n"},"id":"28526","type":"CustomJS"},{"attributes":{"bottom":{"field":"bottom"},"fill_alpha":{"value":0.1},"fill_color":{"value":"red"},"left":{"field":"left"},"line_alpha":{"value":0.1},"line_color":{"value":"white"},"right":{"field":"right"},"top":{"field":"top"}},"id":"28473","type":"Quad"},{"attributes":{},"id":"28466","type":"UnionRenderers"},{"attributes":{},"id":"28426","type":"DataRange1d"},{"attributes":{"data_source":{"id":"28419"},"glyph":{"id":"28457"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"28458"},"selection_glyph":null,"view":{"id":"28460"}},"id":"28459","type":"GlyphRenderer"},{"attributes":{"line_alpha":0.1,"line_color":"#1f77b4","line_width":2,"x":{"field":"x"},"y":{"field":"y"}},"id":"28458","type":"Line"}],"root_ids":["28531"]},"title":"Bokeh Application","version":"2.1.1"}}
+        </script>
+        <script type="text/javascript">
+          (function() {
+            var fn = function() {
+              Bokeh.safely(function() {
+                (function(root) {
+                  function embed_document(root) {
+                    
+                  var docs_json = document.getElementById('29381').textContent;
+                  var render_items = [{"docid":"505168a3-6908-44f2-a6b1-5f7c27a780ce","root_ids":["28531"],"roots":{"28531":"929e59a1-d112-499d-bc49-e93ac43c086c"}}];
+                  root.Bokeh.embed.embed_items(docs_json, render_items);
+                
+                  }
+                  if (root.Bokeh !== undefined) {
+                    embed_document(root);
+                  } else {
+                    var attempts = 0;
+                    var timer = setInterval(function(root) {
+                      if (root.Bokeh !== undefined) {
+                        clearInterval(timer);
+                        embed_document(root);
+                      } else {
+                        attempts++;
+                        if (attempts > 100) {
+                          clearInterval(timer);
+                          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                        }
+                      }
+                    }, 10, root)
+                  }
+                })(window);
+              });
+            };
+            if (document.readyState != "loading") fn();
+            else document.addEventListener("DOMContentLoaded", fn);
+          })();
+        </script>
+
+<br>
+For further information and results check <a href = "https://link.springer.com/content/pdf/10.1007/s11786-017-0321-5.pdf"> this paper</a> out.
   </body>
   
 </html>
