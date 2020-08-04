@@ -7,7 +7,7 @@ Below you can find a list of my publications
 
 **Physics**:
 
-(2020) Higgs self-coupling measurements using deep learning and jet substructure in the \$$ b\bar{b}b\bar{b}$$ final state. <a href="https://arxiv.org/pdf/2004.04240">(arXiv)</a>
+(2020) Higgs self-coupling measurements using deep learning and jet substructure in the $$ b\bar{b}b\bar{b}$$ final state. <a href="https://arxiv.org/pdf/2004.04240">(arXiv)</a>
 
 **Finance**:
 
