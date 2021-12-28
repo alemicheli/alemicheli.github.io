@@ -15,4 +15,4 @@ Below you can find a list of my publications
 
 **Mathematical Finance:**
 
-(2021) Alessandro Micheli, Johannes Muhle-Karbe, E Neuman. <a href="https://arxiv.org/abs/2112.02961">Closed-Loop Nash Competition for Liquidity.</a> <i> (submitted) </i>  <a href="Notebooks.zip"> Mathematica Notebooks </a>
+(2021) Alessandro Micheli, Johannes Muhle-Karbe, Eyal Neuman. <a href="https://arxiv.org/abs/2112.02961">Closed-Loop Nash Competition for Liquidity.</a> <i> (submitted) </i>  <a href="file:///Notebooks.zip"> Mathematica Notebooks </a>
