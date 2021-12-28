@@ -7,7 +7,7 @@ Below you can find a list of my publications
 
 **Physics**:
 
-(2020) Jacob Amacker, William Balunas, Lydia Beresford, Daniela Bortoletto, James Frost, Cigdem Issever, Jesse Liu, James McKee, Alessandro Micheli, Santiago Paredes Saenz, Michael Spannowsky, Beojan Stanislaus.<a href="https://arxiv.org/pdf/2004.04240"> Higgs self-coupling measurements using deep learning and jet substructure in the $$ b\bar{b}b\bar{b} $$ final state.</a> <i> (submitted) </i>
+(2020) Jacob Amacker, William Balunas, Lydia Beresford, Daniela Bortoletto, James Frost, Cigdem Issever, Jesse Liu, James McKee, Alessandro Micheli, Santiago Paredes Saenz, Michael Spannowsky, Beojan Stanislaus.<a href="https://link.springer.com/article/10.1007/JHEP12(2020)115"> Higgs self-coupling measurements using deep learning and jet substructure in the $$ b\bar{b}b\bar{b} $$ final state.</a> <i> J. High Energ. Phys. 2020, 115  </i>
 
 **Finance**:
 
