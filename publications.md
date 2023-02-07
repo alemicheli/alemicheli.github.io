@@ -11,8 +11,10 @@ Below you can find a list of my publications
 
 **Finance**:
 
-(2020) Alessandro Micheli, Eyal Neuman. <a href="https://arxiv.org/pdf/2006.07456">Evidence of Crowding on Russell 3000 Reconstitution Events.</a> <i> (submitted) </i>
+(2020) Alessandro Micheli, Eyal Neuman. <a href="https://www.worldscientific.com/doi/abs/10.1142/S2382626620500094?journalCode=mml">Evidence of Crowding on Russell 3000 Reconstitution Events.</a> <i> Market Microstructure and Liquidity </i>
 
 **Mathematical Finance:**
 
 (2021) Alessandro Micheli, Johannes Muhle-Karbe, Eyal Neuman. <a href="https://arxiv.org/abs/2112.02961">Closed-Loop Nash Competition for Liquidity.</a> <i> (submitted) </i>  <a href="https://alemicheli.github.io/Notebooks.zip"> (Mathematica Notebooks) </a>
+
+(2022) Alessandro Micheli, Eyal Neuman. <a href="https://arxiv.org/pdf/2210.01901">Fast and slow optimal trading with exogenous information.</a> <i> (submitted) </i> 
