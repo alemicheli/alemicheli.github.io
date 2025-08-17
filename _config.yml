@@ -24,7 +24,7 @@ repository               : "alemicheli/alemicheli.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "am_profile.png"
+  avatar           : "am_profile.jpeg"
   name             : "Dr. Alessandro Micheli"
   pronouns         : # example: "she/her"  
   bio              : "Postdoctoral Research Associate in Machine Learning"
