@@ -11,7 +11,7 @@ I am a Postdoctoral Research Associate in Machine Learning at **Imperial College
 
 My research focuses on **probabilistic and geometric machine learning**, with an emphasis on their intersection and applications to real-world problems.
 
-I hold a BSc in **Theoretical Physics** from King’s College London (2018) and a **Master of Advanced Studies** (Part III of the Mathematical Tripos, 2019) from the University of Cambridge. I completed my **PhD in Mathematics** at the EPSRC Centre for Doctoral Training in *Mathematics of Random Systems* (Imperial & Oxford), under the supervision of [Eyal Neuman](https://eyaln13.wixsite.com/eyal-neuman) and [Damiano Brigo](https://profiles.imperial.ac.uk/damiano.brigo).  
+I hold a BSc in **Theoretical Physics** from King’s College London (2018) and a Master of Advanced Studies in **Applied Mathematics** (Part III of the Mathematical Tripos, 2019) from the University of Cambridge. I completed my **PhD in Mathematics** at the EPSRC Centre for Doctoral Training in *Mathematics of Random Systems* (Imperial & Oxford), under the supervision of [Eyal Neuman](https://eyaln13.wixsite.com/eyal-neuman) and [Damiano Brigo](https://profiles.imperial.ac.uk/damiano.brigo).  
 
 Between 2022 and 2024, I worked as a **Quantitative Researcher** at Virtu Financial before returning to academia.  
 
