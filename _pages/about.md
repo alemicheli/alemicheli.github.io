@@ -15,4 +15,4 @@ I hold a BSc in **Theoretical Physics** from King’s College London (2018) and 
 
 Between 2022 and 2024, I worked as a **Quantitative Researcher** at Virtu Financial before returning to academia.  
 
-You can find a full list of my work on my [Publications page](/publications) or on [Google Scholar](#). I welcome discussions and collaborations—please feel free to contact me at **a.micheli [at] imperial [dot] ac [dot] uk**.  
+You can find a full list of my work on my [Publications page](/publications) or on [Google Scholar](https://scholar.google.com/citations?user=RYoj-W0AAAAJ). I welcome discussions and collaborations—please feel free to contact me at **a.micheli19 [at] imperial [dot] ac [dot] uk**.  
