@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const publications = await getCollection("publications");
+const sorted = publications.sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="Publications — Alessandro Micheli">
+  <section class="mx-auto max-w-5xl px-6 pt-36 pb-20">
+    <div class="mb-4 flex items-center gap-4">
+      <span class="block h-px w-10 bg-white/15"></span>
+      <span class="coord-label">INDEX · PUBLICATIONS</span>
+    </div>
+
+    <h1 class="display text-balance text-5xl leading-[1.05] md:text-7xl">
+      Publications.
+    </h1>
+
+    <p class="mt-6 max-w-2xl text-lg leading-9" style="color: var(--color-paper-dim)">
+      Selected research outputs across generative models, probabilistic methods,
+      geometric learning, and applications in science.
+    </p>
+
+    <div class="hairline mt-14 rounded-md">
+      {sorted.map((pub, i) => (
+        <article class={`grid gap-4 px-6 py-7 md:grid-cols-[110px_1fr_auto] md:items-baseline md:px-8 md:py-8 ${i < sorted.length - 1 ? "border-b border-white/5" : ""}`}>
+          <div class="flex flex-col">
+            <span class="coord-label">PUB · {String(i + 1).padStart(2, "0")}</span>
+            <span class="mt-2 text-sm" style="color: var(--color-paper-dim)">{pub.data.year}</span>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap items-center gap-3">
+              {pub.data.venue && (
+                <span class="coord-label">{pub.data.venue}</span>
+              )}
+              {pub.data.featured && (
+                <span class="hairline rounded-sm px-2 py-0.5 text-[0.65rem] uppercase tracking-widest" style="color: var(--color-accent)">
+                  Featured
+                </span>
+              )}
+            </div>
+
+            <h2 class="display text-balance mt-3 text-xl tracking-tight md:text-2xl">
+              {pub.data.title}
+            </h2>
+
+            <p class="mt-2 text-sm" style="color: var(--color-dim)">
+              {pub.data.authors.join(", ")}
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              {pub.data.tags.map((tag) => (
+                <span class="hairline rounded-sm px-2.5 py-1 text-xs" style="color: var(--color-dim)">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {pub.data.links.length > 0 && (
+            <div class="flex flex-wrap gap-2 md:justify-end">
+              {pub.data.links.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="hairline hairline-hover rounded-sm px-3 py-1.5 text-xs"
+                  style="color: var(--color-paper)"
+                >
+                  {link.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

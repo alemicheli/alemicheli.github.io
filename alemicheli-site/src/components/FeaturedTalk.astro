@@ -1,0 +1,83 @@
+---
+const videoId = "MF86GdCWRAc";
+const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+const thumbnailHi = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+const thumbnailFallback = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&start=1`;
+---
+
+<section class="mx-auto max-w-6xl px-6 pb-28">
+  <div class="grid items-center gap-10 border-y border-white/10 py-14 md:grid-cols-[0.9fr_1.1fr]">
+    <div>
+      <div class="flex items-center gap-4">
+        <span class="block h-px w-10 bg-white/15"></span>
+        <span class="coord-label">Featured talk</span>
+      </div>
+
+      <h2 class="display text-balance mt-4 text-3xl tracking-tight md:text-5xl">
+        Riemannian Neural Optimal Transport.
+      </h2>
+
+      <p class="mt-6 max-w-xl text-lg leading-8" style="color: var(--color-paper-dim)">
+        A seminar on neural optimal transport on manifolds: learning maps between
+        probability distributions while respecting the geometry of curved spaces.
+      </p>
+
+      <a
+        href={videoUrl}
+        target="_blank"
+        rel="noreferrer"
+        class="hairline hairline-hover mt-8 inline-flex items-center px-5 py-3 font-mono text-xs uppercase tracking-[0.18em]"
+        style="color: var(--color-paper)"
+      >
+        Open on YouTube ↗
+      </a>
+    </div>
+
+    <div
+      class="hairline group relative block aspect-video overflow-hidden bg-black/40"
+      data-featured-talk
+      data-embed-url={embedUrl}
+    >
+      <button
+        type="button"
+        class="absolute inset-0 cursor-pointer"
+        aria-label="Play seminar video"
+        data-play-button
+      >
+        <img
+          src={thumbnailHi}
+          onerror={`this.onerror=null;this.src='${thumbnailFallback}'`}
+          alt="Riemannian Neural Optimal Transport seminar"
+          class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+          loading="lazy"
+        />
+
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="flex h-16 w-16 items-center justify-center rounded-full border border-white/40 bg-black/55 text-base backdrop-blur-sm transition group-hover:scale-110 group-hover:border-white/70 group-hover:bg-black/75" style="color: var(--color-paper)">
+            <span class="ml-0.5">▶</span>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-featured-talk]").forEach((wrap) => {
+    const button = wrap.querySelector<HTMLButtonElement>("[data-play-button]");
+    const embedUrl = wrap.dataset.embedUrl;
+    if (!button || !embedUrl) return;
+
+    button.addEventListener("click", () => {
+      const iframe = document.createElement("iframe");
+      iframe.src = embedUrl;
+      iframe.title = "Riemannian Neural Optimal Transport seminar";
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.setAttribute("allowfullscreen", "");
+      iframe.className = "absolute inset-0 h-full w-full border-0";
+      wrap.replaceChildren(iframe);
+    });
+  });
+</script>

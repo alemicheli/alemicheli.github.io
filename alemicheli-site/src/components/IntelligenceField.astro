@@ -1,0 +1,80 @@
+---
+const { class: className = "" } = Astro.props;
+---
+
+<canvas
+  data-contour-field
+  class={`block h-full w-full ${className}`}
+  aria-hidden="true"
+></canvas>
+
+<script>
+  const init = (canvas: HTMLCanvasElement) => {
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let width = 0;
+    let height = 0;
+    let start = performance.now();
+    let raf = 0;
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const draw = (now: number) => {
+      const t = (now - start) * 0.0003;
+      ctx.clearRect(0, 0, width, height);
+
+      const lines = 28;
+      const cols = Math.max(60, Math.floor(width / 14));
+
+      for (let i = 0; i < lines; i++) {
+        const yBase = (i / (lines - 1)) * (height + 80) - 40;
+        const phase = i * 0.42;
+        const amp1 = 22 + (i % 5) * 1.4;
+        const amp2 = 11;
+        const amp3 = 5;
+
+        ctx.beginPath();
+        for (let c = 0; c <= cols; c++) {
+          const x = (c / cols) * width;
+          const k1 = x * 0.0085;
+          const k2 = x * 0.022;
+          const k3 = x * 0.055;
+          const y =
+            yBase +
+            amp1 * Math.sin(k1 + t * 1.4 + phase) +
+            amp2 * Math.sin(k2 - t * 2.1 + phase * 0.7) +
+            amp3 * Math.sin(k3 + t * 3.4 + phase * 0.3);
+          if (c === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+
+        const center = 1 - Math.abs(i / (lines - 1) - 0.5) * 2;
+        const alpha = 0.045 + center * 0.07;
+        ctx.strokeStyle = `rgba(122, 140, 255, ${alpha})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      if (!reduce) raf = requestAnimationFrame(draw);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+    raf = requestAnimationFrame(draw);
+  };
+
+  document
+    .querySelectorAll<HTMLCanvasElement>("canvas[data-contour-field]")
+    .forEach(init);
+</script>
