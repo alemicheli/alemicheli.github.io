@@ -60,12 +60,6 @@ body {
   text-transform: uppercase;
 }
 
-.panel {
-  background: var(--color-panel);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(6px);
-}
-
 .hairline {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -101,4 +95,15 @@ body {
 }
 .drift {
   animation: drift-y 14s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -13,13 +13,16 @@ const { class: className = "" } = Astro.props;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     let width = 0;
     let height = 0;
-    let start = performance.now();
+    const start = performance.now();
     let raf = 0;
+    let running = false;
+    let visible = true;
+    let frame = 0;
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -31,11 +34,19 @@ const { class: className = "" } = Astro.props;
     };
 
     const draw = (now: number) => {
+      if (!running) return;
+      frame++;
+      // throttle to ~30fps — visually identical for a slow drift, halves the work
+      if (frame % 2 === 0) {
+        raf = requestAnimationFrame(draw);
+        return;
+      }
+
       const t = (now - start) * 0.0003;
       ctx.clearRect(0, 0, width, height);
 
       const lines = 28;
-      const cols = Math.max(60, Math.floor(width / 14));
+      const cols = Math.max(48, Math.floor(width / 18));
 
       for (let i = 0; i < lines; i++) {
         const yBase = (i / (lines - 1)) * (height + 80) - 40;
@@ -66,12 +77,47 @@ const { class: className = "" } = Astro.props;
         ctx.stroke();
       }
 
-      if (!reduce) raf = requestAnimationFrame(draw);
+      raf = requestAnimationFrame(draw);
+    };
+
+    const start_loop = () => {
+      if (running || reduce || !visible) return;
+      running = true;
+      raf = requestAnimationFrame(draw);
+    };
+    const stop_loop = () => {
+      running = false;
+      if (raf) cancelAnimationFrame(raf);
     };
 
     resize();
-    window.addEventListener("resize", resize);
-    raf = requestAnimationFrame(draw);
+    window.addEventListener("resize", resize, { passive: true });
+
+    // Pause animation when canvas is off-screen
+    const io = new IntersectionObserver(
+      (entries) => {
+        visible = entries[0]?.isIntersecting ?? false;
+        if (visible) start_loop();
+        else stop_loop();
+      },
+      { threshold: 0.01 }
+    );
+    io.observe(canvas);
+
+    // Pause when tab is hidden
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stop_loop();
+      else if (visible) start_loop();
+    });
+
+    if (reduce) {
+      // draw a single static frame, no loop
+      running = true;
+      draw(performance.now());
+      running = false;
+    } else {
+      start_loop();
+    }
   };
 
   document
