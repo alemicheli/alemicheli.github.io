@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import ResearchCard from "../components/ResearchCard.astro";
+---
+
+<BaseLayout>
+  <Hero />
+
+  <section class="mx-auto max-w-6xl px-6 py-20">
+    <div class="mb-10 max-w-3xl">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
+        Featured research
+      </p>
+      <h2 class="text-3xl font-semibold tracking-tight md:text-5xl">
+        Building AI systems that understand uncertainty.
+      </h2>
+      <p class="mt-5 text-lg leading-8 text-slate-300">
+        My work combines Bayesian deep learning, diffusion models, geometric machine learning,
+        and scientific applications where uncertainty matters.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      <ResearchCard
+        title="NeuralSurv"
+        description="Bayesian uncertainty quantification for deep survival analysis in high-stakes clinical settings."
+        tags={["Bayesian DL", "Survival Analysis", "Uncertainty"]}
+        href="/research/neuralsurv"
+      />
+
+      <ResearchCard
+        title="Diffusion Inference"
+        description="Diffusion models for inverse problems with non-Gaussian likelihoods and scientific applications."
+        tags={["Diffusion Models", "Inverse Problems", "Scientific ML"]}
+        href="/research/diffusion-inverse-problems"
+      />
+
+      <ResearchCard
+        title="Geometric Probabilistic ML"
+        description="Learning with structure, geometry, and calibrated uncertainty on complex data."
+        tags={["Geometry", "Probabilistic ML", "Structured Data"]}
+        href="/research/geometric-ml"
+      />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pb-24">
+    <div class="glass rounded-3xl p-8 md:p-12">
+      <p class="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-violet-300">
+        Research vision
+      </p>
+      <h2 class="max-w-4xl text-3xl font-semibold tracking-tight md:text-5xl">
+        Modern AI should not only predict. It should know when it is uncertain.
+      </h2>
+      <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+        I am interested in AI methods that are mathematically grounded, uncertainty-aware,
+        and reliable enough for scientific and decision-critical domains.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

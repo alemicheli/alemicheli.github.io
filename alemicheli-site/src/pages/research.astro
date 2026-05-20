@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ResearchCard from "../components/ResearchCard.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+const sorted = projects.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Research — Alessandro Micheli">
+  <section class="mx-auto max-w-6xl px-6 pt-32 pb-20">
+    <p class="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
+      Research
+    </p>
+
+    <h1 class="max-w-4xl text-5xl font-semibold tracking-tight md:text-7xl">
+      Methods that quantify what they don't know.
+    </h1>
+
+    <p class="mt-7 max-w-2xl text-xl leading-9 text-slate-300">
+      Three threads of work, all aimed at building probabilistic models that are reliable
+      enough for science and high-stakes decisions.
+    </p>
+
+    <div class="mt-14 grid gap-6 md:grid-cols-3">
+      {sorted.map((project) => (
+        <ResearchCard
+          title={project.data.title}
+          description={project.data.summary}
+          tags={project.data.tags}
+          href={`/research/${project.slug}`}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

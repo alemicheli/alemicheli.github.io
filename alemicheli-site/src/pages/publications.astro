@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const publications = await getCollection("publications");
+const sorted = publications.sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="Publications — Alessandro Micheli">
+  <section class="mx-auto max-w-5xl px-6 pt-32 pb-20">
+    <p class="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
+      Publications
+    </p>
+
+    <h1 class="text-5xl font-semibold tracking-tight md:text-7xl">
+      Selected research outputs.
+    </h1>
+
+    <div class="mt-14 space-y-5">
+      {sorted.map((pub) => (
+        <article class="glass rounded-3xl p-6">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="text-sm font-semibold text-cyan-300">{pub.data.year}</span>
+            {pub.data.venue && (
+              <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300">
+                {pub.data.venue}
+              </span>
+            )}
+            {pub.data.featured && (
+              <span class="rounded-full bg-violet-500/20 px-3 py-1 text-xs text-violet-200">
+                Featured
+              </span>
+            )}
+          </div>
+
+          <h2 class="mt-4 text-2xl font-semibold">
+            {pub.data.title}
+          </h2>
+
+          <p class="mt-2 text-slate-400">
+            {pub.data.authors.join(", ")}
+          </p>
+
+          <div class="mt-5 flex flex-wrap gap-2">
+            {pub.data.tags.map((tag) => (
+              <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div class="mt-6 flex gap-4 text-sm font-semibold text-cyan-300">
+            {pub.data.links.map((link) => (
+              <a href={link.url} target="_blank" rel="noreferrer">
+                {link.label} →
+              </a>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
