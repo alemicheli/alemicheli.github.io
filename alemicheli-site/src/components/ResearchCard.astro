@@ -1,30 +1,93 @@
 ---
-const { title, description, tags = [], href } = Astro.props;
+const { title, description, tags = [], href, index = 0, diagram = "wave" } = Astro.props;
+const idx = String(index).padStart(2, "0");
 ---
 
 <a
   href={href}
-  class="glass group rounded-3xl p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/40"
+  class="hairline hairline-hover group block rounded-md p-6 md:p-7"
 >
-  <div class="mb-8 h-32 rounded-2xl bg-gradient-to-br from-violet-500/20 via-cyan-400/10 to-transparent"></div>
+  <div class="mb-7 flex items-center">
+    <span class="coord-label">№ {idx}</span>
+  </div>
 
-  <h3 class="text-2xl font-semibold tracking-tight">
+  <div class="hairline relative mb-8 h-36 overflow-hidden rounded-sm bg-black/30">
+    {diagram === "wave" && (
+      <svg viewBox="0 0 200 120" preserveAspectRatio="none" class="absolute inset-0 h-full w-full">
+        {Array.from({ length: 14 }).map((_, i) => (
+          <path
+            d={`M0 ${10 + i * 8} Q 50 ${4 + i * 8 + (i % 2 === 0 ? -4 : 4)} 100 ${10 + i * 8} T 200 ${10 + i * 8}`}
+            fill="none"
+            stroke="rgba(122,140,255,0.35)"
+            stroke-width="0.7"
+            opacity={0.4 + (i / 14) * 0.5}
+          />
+        ))}
+      </svg>
+    )}
+
+    {diagram === "graph" && (
+      <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet" class="absolute inset-0 h-full w-full">
+        <g stroke="rgba(122,140,255,0.5)" stroke-width="0.6" fill="none">
+          <line x1="30" y1="30" x2="80" y2="60" />
+          <line x1="80" y1="60" x2="50" y2="95" />
+          <line x1="80" y1="60" x2="130" y2="40" />
+          <line x1="130" y1="40" x2="170" y2="80" />
+          <line x1="80" y1="60" x2="150" y2="95" />
+          <line x1="30" y1="30" x2="130" y2="40" />
+          <line x1="50" y1="95" x2="150" y2="95" />
+          <line x1="170" y1="80" x2="150" y2="95" />
+        </g>
+        <g fill="rgba(244,241,234,0.9)">
+          <circle cx="30" cy="30" r="2.4" />
+          <circle cx="80" cy="60" r="2.4" />
+          <circle cx="50" cy="95" r="2.4" />
+          <circle cx="130" cy="40" r="2.4" />
+          <circle cx="170" cy="80" r="2.4" />
+          <circle cx="150" cy="95" r="2.4" />
+        </g>
+      </svg>
+    )}
+
+    {diagram === "field" && (
+      <svg viewBox="0 0 200 120" preserveAspectRatio="none" class="absolute inset-0 h-full w-full">
+        <g stroke="rgba(122,140,255,0.4)" stroke-width="0.5" fill="none">
+          {Array.from({ length: 7 }).map((_, ry) =>
+            Array.from({ length: 12 }).map((_, rx) => {
+              const x = 12 + rx * 16;
+              const y = 14 + ry * 15;
+              const a = Math.sin(rx * 0.7 + ry * 0.5) * 0.8 + Math.cos(rx * 0.3) * 0.4;
+              const dx = Math.cos(a) * 6;
+              const dy = Math.sin(a) * 6;
+              return (
+                <line x1={x} y1={y} x2={x + dx} y2={y + dy} />
+              );
+            })
+          )}
+        </g>
+      </svg>
+    )}
+
+    <div class="grid-faint pointer-events-none absolute inset-0 opacity-60"></div>
+  </div>
+
+  <h3 class="display text-2xl tracking-tight" style="color: var(--color-paper)">
     {title}
   </h3>
 
-  <p class="mt-4 leading-7 text-slate-300">
+  <p class="mt-3 leading-7" style="color: var(--color-paper-dim)">
     {description}
   </p>
 
   <div class="mt-6 flex flex-wrap gap-2">
     {tags.map((tag: string) => (
-      <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300">
+      <span class="hairline rounded-sm px-2.5 py-1 text-xs" style="color: var(--color-dim)">
         {tag}
       </span>
     ))}
   </div>
 
-  <p class="mt-8 text-sm font-semibold text-cyan-300">
-    Explore project →
+  <p class="coord-label mt-8 transition group-hover:text-[var(--color-accent)]">
+    Read →
   </p>
 </a>

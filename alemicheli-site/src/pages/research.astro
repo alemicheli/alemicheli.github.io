@@ -5,30 +5,34 @@ import { getCollection } from "astro:content";
 
 const projects = await getCollection("projects");
 const sorted = projects.sort((a, b) => a.data.order - b.data.order);
+const diagrams = ["wave", "graph", "field"];
 ---
 
 <BaseLayout title="Research — Alessandro Micheli">
-  <section class="mx-auto max-w-6xl px-6 pt-32 pb-20">
-    <p class="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
-      Research
-    </p>
+  <section class="relative mx-auto max-w-6xl px-6 pt-36 pb-24">
+    <div class="mb-4 flex items-center gap-4">
+      <span class="block h-px w-10 bg-white/15"></span>
+      <span class="coord-label">INDEX · RESEARCH</span>
+    </div>
 
-    <h1 class="max-w-4xl text-5xl font-semibold tracking-tight md:text-7xl">
-      Methods that quantify what they don't know.
+    <h1 class="display text-balance mt-2 max-w-4xl text-5xl leading-[1.05] md:text-7xl">
+      Research, in three threads.
     </h1>
 
-    <p class="mt-7 max-w-2xl text-xl leading-9 text-slate-300">
-      Three threads of work, all aimed at building probabilistic models that are reliable
-      enough for science and high-stakes decisions.
+    <p class="mt-7 max-w-2xl text-lg leading-9" style="color: var(--color-paper-dim)">
+      Three threads of work — generative, structured, scientific — built on top of a shared
+      mathematical core.
     </p>
 
     <div class="mt-14 grid gap-6 md:grid-cols-3">
-      {sorted.map((project) => (
+      {sorted.map((project, i) => (
         <ResearchCard
           title={project.data.title}
           description={project.data.summary}
           tags={project.data.tags}
           href={`/research/${project.slug}`}
+          index={i + 1}
+          diagram={diagrams[i % diagrams.length]}
         />
       ))}
     </div>

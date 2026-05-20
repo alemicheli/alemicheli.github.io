@@ -4,26 +4,31 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout title={`${frontmatter.title} — Alessandro Micheli`}>
-  <section class="mx-auto max-w-3xl px-6 pt-32 pb-20">
-    <p class="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
-      Research project
-    </p>
-    <h1 class="text-4xl font-semibold tracking-tight md:text-6xl">
+  <section class="mx-auto max-w-3xl px-6 pt-36 pb-24">
+    <div class="mb-4 flex items-center gap-4">
+      <span class="block h-px w-10 bg-white/15"></span>
+      <span class="coord-label">RESEARCH</span>
+    </div>
+
+    <h1 class="display text-balance text-4xl leading-[1.05] md:text-6xl">
       {frontmatter.title}
     </h1>
-    <p class="mt-5 text-lg leading-8 text-slate-300">
+
+    <p class="mt-6 text-lg leading-8" style="color: var(--color-paper-dim)">
       {frontmatter.summary}
     </p>
 
     <div class="mt-6 flex flex-wrap gap-2">
       {frontmatter.tags?.map((tag: string) => (
-        <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300">
+        <span class="hairline rounded-sm px-2.5 py-1 text-xs" style="color: var(--color-dim)">
           {tag}
         </span>
       ))}
     </div>
 
-    <article class="prose prose-invert mt-12 max-w-none prose-headings:tracking-tight prose-headings:font-semibold prose-p:text-slate-300 prose-p:leading-8 prose-a:text-cyan-300">
+    <div class="rule mt-12"></div>
+
+    <article class="prose prose-invert mt-12 max-w-none prose-headings:font-medium prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-p:text-[var(--color-paper-dim)] prose-p:leading-8 prose-li:text-[var(--color-paper-dim)] prose-strong:text-[var(--color-paper)] prose-a:text-[var(--color-accent)] prose-a:no-underline hover:prose-a:underline">
       <slot />
     </article>
   </section>

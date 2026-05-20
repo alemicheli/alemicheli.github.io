@@ -7,55 +7,73 @@ const sorted = publications.sort((a, b) => b.data.year - a.data.year);
 ---
 
 <BaseLayout title="Publications — Alessandro Micheli">
-  <section class="mx-auto max-w-5xl px-6 pt-32 pb-20">
-    <p class="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
-      Publications
-    </p>
+  <section class="mx-auto max-w-5xl px-6 pt-36 pb-20">
+    <div class="mb-4 flex items-center gap-4">
+      <span class="block h-px w-10 bg-white/15"></span>
+      <span class="coord-label">INDEX · PUBLICATIONS</span>
+    </div>
 
-    <h1 class="text-5xl font-semibold tracking-tight md:text-7xl">
-      Selected research outputs.
+    <h1 class="display text-balance text-5xl leading-[1.05] md:text-7xl">
+      Publications.
     </h1>
 
-    <div class="mt-14 space-y-5">
-      {sorted.map((pub) => (
-        <article class="glass rounded-3xl p-6">
-          <div class="flex flex-wrap items-center gap-3">
-            <span class="text-sm font-semibold text-cyan-300">{pub.data.year}</span>
-            {pub.data.venue && (
-              <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300">
-                {pub.data.venue}
-              </span>
-            )}
-            {pub.data.featured && (
-              <span class="rounded-full bg-violet-500/20 px-3 py-1 text-xs text-violet-200">
-                Featured
-              </span>
-            )}
+    <p class="mt-6 max-w-2xl text-lg leading-9" style="color: var(--color-paper-dim)">
+      Selected research outputs across generative models, probabilistic methods,
+      geometric learning, and applications in science.
+    </p>
+
+    <div class="hairline mt-14 rounded-md">
+      {sorted.map((pub, i) => (
+        <article class={`grid gap-4 px-6 py-7 md:grid-cols-[110px_1fr_auto] md:items-baseline md:px-8 md:py-8 ${i < sorted.length - 1 ? "border-b border-white/5" : ""}`}>
+          <div class="flex flex-col">
+            <span class="coord-label">PUB · {String(i + 1).padStart(2, "0")}</span>
+            <span class="mt-2 text-sm" style="color: var(--color-paper-dim)">{pub.data.year}</span>
           </div>
 
-          <h2 class="mt-4 text-2xl font-semibold">
-            {pub.data.title}
-          </h2>
+          <div>
+            <div class="flex flex-wrap items-center gap-3">
+              {pub.data.venue && (
+                <span class="coord-label">{pub.data.venue}</span>
+              )}
+              {pub.data.featured && (
+                <span class="hairline rounded-sm px-2 py-0.5 text-[0.65rem] uppercase tracking-widest" style="color: var(--color-accent)">
+                  Featured
+                </span>
+              )}
+            </div>
 
-          <p class="mt-2 text-slate-400">
-            {pub.data.authors.join(", ")}
-          </p>
+            <h2 class="display text-balance mt-3 text-xl tracking-tight md:text-2xl">
+              {pub.data.title}
+            </h2>
 
-          <div class="mt-5 flex flex-wrap gap-2">
-            {pub.data.tags.map((tag) => (
-              <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300">
-                {tag}
-              </span>
-            ))}
+            <p class="mt-2 text-sm" style="color: var(--color-dim)">
+              {pub.data.authors.join(", ")}
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              {pub.data.tags.map((tag) => (
+                <span class="hairline rounded-sm px-2.5 py-1 text-xs" style="color: var(--color-dim)">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
 
-          <div class="mt-6 flex gap-4 text-sm font-semibold text-cyan-300">
-            {pub.data.links.map((link) => (
-              <a href={link.url} target="_blank" rel="noreferrer">
-                {link.label} →
-              </a>
-            ))}
-          </div>
+          {pub.data.links.length > 0 && (
+            <div class="flex flex-wrap gap-2 md:justify-end">
+              {pub.data.links.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="hairline hairline-hover rounded-sm px-3 py-1.5 text-xs"
+                  style="color: var(--color-paper)"
+                >
+                  {link.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
         </article>
       ))}
     </div>

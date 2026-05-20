@@ -1,62 +1,76 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
-import ResearchCard from "../components/ResearchCard.astro";
+import FeaturedTalk from "../components/FeaturedTalk.astro";
+import BioSection from "../components/BioSection.astro";
+import { getCollection } from "astro:content";
+
+const publications = await getCollection("publications");
+const recent = publications
+  .filter((p) => p.data.featured)
+  .sort((a, b) => b.data.year - a.data.year);
 ---
 
 <BaseLayout>
   <Hero />
 
-  <section class="mx-auto max-w-6xl px-6 py-20">
-    <div class="mb-10 max-w-3xl">
-      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
-        Featured research
-      </p>
-      <h2 class="text-3xl font-semibold tracking-tight md:text-5xl">
-        Building AI systems that understand uncertainty.
-      </h2>
-      <p class="mt-5 text-lg leading-8 text-slate-300">
-        My work combines Bayesian deep learning, diffusion models, geometric machine learning,
-        and scientific applications where uncertainty matters.
-      </p>
+  <section class="mx-auto max-w-6xl px-6 pb-28 pt-20">
+    <div class="mb-10 flex items-center gap-4">
+      <span class="block h-px w-10 bg-white/15"></span>
+      <span class="coord-label">Recent work</span>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-3">
-      <ResearchCard
-        title="NeuralSurv"
-        description="Bayesian uncertainty quantification for deep survival analysis in high-stakes clinical settings."
-        tags={["Bayesian DL", "Survival Analysis", "Uncertainty"]}
-        href="/research/neuralsurv"
-      />
+    <div class="hairline rounded-md">
+      {recent.map((pub, i) => (
+        <article class={`grid gap-4 px-6 py-7 md:grid-cols-[110px_1fr_auto] md:items-start md:px-8 md:py-8 ${i < recent.length - 1 ? "border-b border-white/5" : ""}`}>
+          <div class="flex flex-col">
+            <span class="coord-label">№ {String(i + 1).padStart(2, "0")}</span>
+            <span class="mt-2 text-sm" style="color: var(--color-paper-dim)">{pub.data.year}</span>
+          </div>
 
-      <ResearchCard
-        title="Diffusion Inference"
-        description="Diffusion models for inverse problems with non-Gaussian likelihoods and scientific applications."
-        tags={["Diffusion Models", "Inverse Problems", "Scientific ML"]}
-        href="/research/diffusion-inverse-problems"
-      />
+          <div>
+            {pub.data.status && (
+              <span class="hairline inline-block rounded-sm px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.18em]" style="color: var(--color-accent); border-color: rgba(122,140,255,0.35)">
+                {pub.data.status}
+              </span>
+            )}
 
-      <ResearchCard
-        title="Geometric Probabilistic ML"
-        description="Learning with structure, geometry, and calibrated uncertainty on complex data."
-        tags={["Geometry", "Probabilistic ML", "Structured Data"]}
-        href="/research/geometric-ml"
-      />
+            <h3 class="display mt-4 text-balance text-xl tracking-tight md:text-2xl">
+              {pub.data.title}
+            </h3>
+
+            <p class="mt-1 text-sm" style="color: var(--color-dim)">
+              {pub.data.authors.join(", ")}
+            </p>
+
+            {pub.data.description && (
+              <p class="mt-4 max-w-2xl leading-7" style="color: var(--color-paper-dim)">
+                {pub.data.description}
+              </p>
+            )}
+          </div>
+
+          {pub.data.links.length > 0 && (
+            <div class="flex flex-wrap gap-3 md:justify-end">
+              {pub.data.links.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="hairline hairline-hover rounded-sm px-3 py-1.5 text-xs"
+                  style="color: var(--color-paper)"
+                >
+                  {link.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-6 pb-24">
-    <div class="glass rounded-3xl p-8 md:p-12">
-      <p class="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-violet-300">
-        Research vision
-      </p>
-      <h2 class="max-w-4xl text-3xl font-semibold tracking-tight md:text-5xl">
-        Modern AI should not only predict. It should know when it is uncertain.
-      </h2>
-      <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-        I am interested in AI methods that are mathematically grounded, uncertainty-aware,
-        and reliable enough for scientific and decision-critical domains.
-      </p>
-    </div>
-  </section>
+  <FeaturedTalk />
+
+  <BioSection />
 </BaseLayout>
