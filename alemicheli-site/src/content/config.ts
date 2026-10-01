@@ -5,8 +5,10 @@ const publications = defineCollection({
   schema: z.object({
     title: z.string(),
     year: z.number(),
+    date: z.coerce.date(),
     venue: z.string().optional(),
     status: z.string().optional(),
+    group: z.string().optional(),
     description: z.string().optional(),
     authors: z.array(z.string()),
     tags: z.array(z.string()).default([]),

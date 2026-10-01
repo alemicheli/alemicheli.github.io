@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const publications = await getCollection("publications");
-const sorted = publications.sort((a, b) => b.data.year - a.data.year);
+const sorted = publications.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <BaseLayout title="Publications — Alessandro Micheli">

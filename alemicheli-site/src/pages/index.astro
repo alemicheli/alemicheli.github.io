@@ -8,7 +8,15 @@ import { getCollection } from "astro:content";
 const publications = await getCollection("publications");
 const recent = publications
   .filter((p) => p.data.featured)
-  .sort((a, b) => b.data.year - a.data.year);
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Publications sharing a `group` headline are shown together as one news item.
+const entries: { group?: string; pubs: typeof recent }[] = [];
+for (const pub of recent) {
+  const existing = pub.data.group && entries.find((e) => e.group === pub.data.group);
+  if (existing) existing.pubs.push(pub);
+  else entries.push({ group: pub.data.group, pubs: [pub] });
+}
 ---
 
 <BaseLayout>
@@ -21,50 +29,100 @@ const recent = publications
     </div>
 
     <div class="hairline rounded-md">
-      {recent.map((pub, i) => (
-        <article class={`grid gap-4 px-6 py-7 md:grid-cols-[110px_1fr_auto] md:items-start md:px-8 md:py-8 ${i < recent.length - 1 ? "border-b border-white/5" : ""}`}>
+      {entries.map(({ group, pubs }, i) => (
+        <article class={`grid gap-4 px-6 py-7 md:grid-cols-[110px_1fr_auto] md:items-start md:px-8 md:py-8 ${i < entries.length - 1 ? "border-b border-white/5" : ""}`}>
           <div class="flex flex-col">
             <span class="coord-label">№ {String(i + 1).padStart(2, "0")}</span>
-            <span class="mt-2 text-sm" style="color: var(--color-paper-dim)">{pub.data.year}</span>
+            <span class="mt-2 text-sm" style="color: var(--color-paper-dim)">{pubs[0].data.year}</span>
           </div>
 
-          <div>
-            {pub.data.status && (
+          {group ? (
+            <div class="md:col-span-2">
               <span class="hairline inline-block rounded-sm px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.18em]" style="color: var(--color-accent); border-color: rgba(122,140,255,0.35)">
-                {pub.data.status}
+                News
               </span>
-            )}
 
-            <h3 class="display mt-4 text-balance text-xl tracking-tight md:text-2xl">
-              {pub.data.title}
-            </h3>
+              <h3 class="display mt-4 text-balance text-xl tracking-tight md:text-2xl">
+                {group}
+              </h3>
 
-            <p class="mt-1 text-sm" style="color: var(--color-dim)">
-              {pub.data.authors.join(", ")}
-            </p>
+              <ul class="mt-6 border-t border-white/5">
+                {pubs.map((pub) => (
+                  <li class="grid gap-3 border-b border-white/5 py-5 last:border-b-0 last:pb-0 md:grid-cols-[1fr_auto] md:items-start md:gap-6">
+                    <div>
+                      {pub.data.venue && (
+                        <span class="coord-label">{pub.data.venue}</span>
+                      )}
 
-            {pub.data.description && (
-              <p class="mt-4 max-w-2xl leading-7" style="color: var(--color-paper-dim)">
-                {pub.data.description}
-              </p>
-            )}
-          </div>
+                      <h4 class="display mt-2 text-balance text-lg tracking-tight">
+                        {pub.data.title}
+                      </h4>
 
-          {pub.data.links.length > 0 && (
-            <div class="flex flex-wrap gap-3 md:justify-end">
-              {pub.data.links.map((link) => (
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  class="hairline hairline-hover rounded-sm px-3 py-1.5 text-xs"
-                  style="color: var(--color-paper)"
-                >
-                  {link.label} ↗
-                </a>
-              ))}
+                      <p class="mt-1 text-sm" style="color: var(--color-dim)">
+                        {pub.data.authors.join(", ")}
+                      </p>
+                    </div>
+
+                    {pub.data.links.length > 0 && (
+                      <div class="flex flex-wrap gap-3 md:justify-end">
+                        {pub.data.links.map((link) => (
+                          <a
+                            href={link.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            class="hairline hairline-hover rounded-sm px-3 py-1.5 text-xs"
+                            style="color: var(--color-paper)"
+                          >
+                            {link.label} ↗
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
             </div>
-          )}
+          ) : pubs.map((pub) => (
+            <>
+              <div>
+                {pub.data.status && (
+                  <span class="hairline inline-block rounded-sm px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.18em]" style="color: var(--color-accent); border-color: rgba(122,140,255,0.35)">
+                    {pub.data.status}
+                  </span>
+                )}
+
+                <h3 class="display mt-4 text-balance text-xl tracking-tight md:text-2xl">
+                  {pub.data.title}
+                </h3>
+
+                <p class="mt-1 text-sm" style="color: var(--color-dim)">
+                  {pub.data.authors.join(", ")}
+                </p>
+
+                {pub.data.description && (
+                  <p class="mt-4 max-w-2xl leading-7" style="color: var(--color-paper-dim)">
+                    {pub.data.description}
+                  </p>
+                )}
+              </div>
+
+              {pub.data.links.length > 0 && (
+                <div class="flex flex-wrap gap-3 md:justify-end">
+                  {pub.data.links.map((link) => (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="hairline hairline-hover rounded-sm px-3 py-1.5 text-xs"
+                      style="color: var(--color-paper)"
+                    >
+                      {link.label} ↗
+                    </a>
+                  ))}
+                </div>
+              )}
+            </>
+          ))}
         </article>
       ))}
     </div>
